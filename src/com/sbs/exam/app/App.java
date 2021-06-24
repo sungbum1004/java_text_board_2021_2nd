@@ -16,6 +16,17 @@ public class App {
 		List<Article> articles = new ArrayList<>();
 		int articlesLastId = 0;
 
+		for (int i = 0; i < 10; i++) {
+			Article article = new Article();
+			article.id = articlesLastId + 1;
+			article.regDate = Util.getNowDateStr();
+			article.updateDate = Util.getNowDateStr();
+			article.title = "제목 " + article.id;
+			article.body = "내용 " + article.id;
+			articles.add(article);
+			articlesLastId++;
+		}
+
 		while (true) {
 			System.out.printf("명령어) ");
 
