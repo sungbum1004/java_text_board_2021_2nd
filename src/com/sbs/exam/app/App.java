@@ -41,13 +41,11 @@ public class App {
 			} else if (command.equals("/usr/article/list")) {
 				System.out.printf("번호 / 작성날자 / 제목\n");
 
-//				for ( int i = 0; i < articles.size(); i++ ) {
-//					Article article = articles.get(i);
-//				}
-
-				for (Article article : articles) {
+				for (int i = articles.size() - 1; i >= 0; i--) {
+					Article article = articles.get(i);
 					System.out.printf("%d / %s / %s\n", article.id, article.regDate, article.title);
 				}
+
 			} else if (command.equals("/usr/system/exit")) {
 				System.out.println("프로그램을 종료 합니다.");
 				break;
