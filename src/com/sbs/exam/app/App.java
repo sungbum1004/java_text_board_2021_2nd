@@ -33,12 +33,21 @@ public class App {
 				article.title = title;
 				article.body = body;
 				articles.add(article);
-				
+
 				articlesLastId++;
 
 				System.out.printf("%d번 게시물이 생성되었습니다.\n", article.id);
-			}
-			if (command.equals("/usr/system/exit")) {
+			} else if (command.equals("/usr/article/list")) {
+				System.out.printf("번호 / 작성날자 / 제목\n");
+
+//				for ( int i = 0; i < articles.size(); i++ ) {
+//					Article article = articles.get(i);
+//				}
+
+				for (Article article : articles) {
+					System.out.printf("%d / %s / %s\n", article.id, article.regDate, article.title);
+				}
+			} else if (command.equals("/usr/system/exit")) {
 				System.out.println("프로그램을 종료 합니다.");
 				break;
 			}
