@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.sbs.exam.app.dto.Article;
+import com.sbs.exam.util.Util;
 
 public class App {
 	public static void run() {
@@ -28,8 +29,8 @@ public class App {
 
 				Article article = new Article();
 				article.id = articlesLastId + 1;
-				article.regDate = "2021-06-24 12:12:12";
-				article.updateDate = "2021-06-24 12:12:12";
+				article.regDate = Util.getNowDateStr();
+				article.updateDate = Util.getNowDateStr();
 				article.title = title;
 				article.body = body;
 				articles.add(article);
