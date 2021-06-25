@@ -101,6 +101,45 @@ public class App {
 				System.out.printf("제목 : %s\n", foundArticle.title);
 				System.out.printf("내용 : %s\n", foundArticle.body);
 
+			} else if (command.startsWith("/usr/article/delete")) {
+				String queryString = command.split("\\?", 2)[1];
+				String[] queryStringBits = queryString.split("&");
+
+				int id = 0;
+
+				for (String queryStringBit : queryStringBits) {
+					String[] queryStringBitBits = queryStringBit.split("=", 2);
+					String paramName = queryStringBitBits[0];
+					String paramValue = queryStringBitBits[1];
+
+					if (paramName.equals("id")) {
+						id = Integer.parseInt(paramValue);
+					}
+				}
+
+				if (id == 0) {
+					System.out.println("id를 입력해주세요.");
+					continue;
+				}
+
+				Article foundArticle = null;
+
+				for (Article article : articles) {
+					if (article.id == id) {
+						foundArticle = article;
+						break;
+					}
+				}
+
+				if (foundArticle == null) {
+					System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
+					continue;
+				}
+
+				articles.remove(foundArticle);
+
+				System.out.printf("%d번 게시물을 삭제하였습니다.\n", id);
+
 			} else if (command.equals("/usr/system/exit")) {
 				System.out.println("프로그램을 종료 합니다.");
 				break;
