@@ -121,6 +121,36 @@ public class App {
 
 				System.out.printf("%d번 게시물을 삭제하였습니다.\n", id);
 
+			} else if (rq.getActionPath().equals("/usr/article/modify")) {
+				int id = rq.getIntParam("id", 0);
+
+				if (id == 0) {
+					System.out.println("id를 입력해주세요.");
+					continue;
+				}
+
+				Article foundArticle = null;
+
+				for (Article article : articles) {
+					if (article.id == id) {
+						foundArticle = article;
+						break;
+					}
+				}
+
+				if (foundArticle == null) {
+					System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
+					continue;
+				}
+
+				System.out.printf("새 제목 : ");
+				foundArticle.title = sc.nextLine();
+				System.out.printf("새 내용 : ");
+				foundArticle.body = sc.nextLine();
+				foundArticle.updateDate = Util.getNowDateStr();
+
+				System.out.printf("%d번 게시물을 수정하였습니다.\n", id);
+
 			} else if (rq.getActionPath().equals("/usr/system/exit")) {
 				System.out.println("프로그램을 종료 합니다.");
 				break;
