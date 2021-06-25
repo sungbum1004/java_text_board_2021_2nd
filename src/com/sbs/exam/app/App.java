@@ -68,20 +68,7 @@ public class App {
 				System.out.println("프로그램을 종료 합니다.");
 				break;
 			} else if (rq.getActionPath().equals("/usr/article/detail")) {
-				String queryString = command.split("\\?", 2)[1];
-				String[] queryStringBits = queryString.split("&");
-
-				int id = 0;
-
-				for (String queryStringBit : queryStringBits) {
-					String[] queryStringBitBits = queryStringBit.split("=", 2);
-					String paramName = queryStringBitBits[0];
-					String paramValue = queryStringBitBits[1];
-
-					if (paramName.equals("id")) {
-						id = Integer.parseInt(paramValue);
-					}
-				}
+				int id = rq.getIntParam("id", 0);
 
 				if (id == 0) {
 					System.out.println("id를 입력해주세요.");
@@ -109,20 +96,7 @@ public class App {
 				System.out.printf("내용 : %s\n", foundArticle.body);
 
 			} else if (rq.getActionPath().equals("/usr/article/delete")) {
-				String queryString = command.split("\\?", 2)[1];
-				String[] queryStringBits = queryString.split("&");
-
-				int id = 0;
-
-				for (String queryStringBit : queryStringBits) {
-					String[] queryStringBitBits = queryStringBit.split("=", 2);
-					String paramName = queryStringBitBits[0];
-					String paramValue = queryStringBitBits[1];
-
-					if (paramName.equals("id")) {
-						id = Integer.parseInt(paramValue);
-					}
-				}
+				int id = rq.getIntParam("id", 0);
 
 				if (id == 0) {
 					System.out.println("id를 입력해주세요.");
