@@ -34,6 +34,11 @@ public class App {
 
 			Rq rq = new Rq(command);
 
+			if (rq.isValid == false) {
+				System.out.printf("명령어가 올바르지 않습니다.\n");
+				continue;
+			}
+
 			if (rq.getActionPath().equals("/usr/article/write")) {
 				System.out.printf("제목 : ");
 				String title = sc.nextLine().trim();
