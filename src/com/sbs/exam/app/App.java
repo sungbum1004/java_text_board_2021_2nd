@@ -1,10 +1,13 @@
 package com.sbs.exam.app;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.sbs.exam.app.container.Container;
 import com.sbs.exam.app.controller.Controller;
 import com.sbs.exam.app.dto.Member;
+import com.sbs.exam.app.interceptor.Interceptor;
 
 public class App {
 	Scanner sc;
@@ -37,6 +40,10 @@ public class App {
 				continue;
 			}
 
+			if (runInterceptors(rq) == false) {
+				continue;
+			}
+
 			Controller controller = getControllerByRequestUri(rq);
 			controller.performAction(rq);
 
@@ -46,6 +53,21 @@ public class App {
 		}
 
 		System.out.println("== 텍스트 게시판 끝 ==");
+	}
+
+	private boolean runInterceptors(Rq rq) {
+		List<Interceptor> interceptors = new ArrayList<>();
+
+		interceptors.add(Container.getNeedLoginInterceptor());
+		interceptors.add(Container.getNeedLogoutInterceptor());
+
+		for (Interceptor interceptor : interceptors) {
+			if (interceptor.run(rq) == false) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	private Controller getControllerByRequestUri(Rq rq) {
