@@ -46,6 +46,7 @@ public class UsrArticleController extends Controller {
 		return null;
 	}
 
+	@Override
 	public void performAction(Rq rq) {
 		if (rq.getActionPath().equals("/usr/article/write")) {
 			actionWrite(rq);

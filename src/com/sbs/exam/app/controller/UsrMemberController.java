@@ -49,6 +49,7 @@ public class UsrMemberController extends Controller {
 		return null;
 	}
 
+	@Override
 	public void performAction(Rq rq) {
 		if (rq.getActionPath().equals("/usr/member/login")) {
 			actionLogin(rq);
@@ -58,7 +59,7 @@ public class UsrMemberController extends Controller {
 	}
 
 	private void actionLogout(Rq rq) {
-		rq.removeSessionAttr("loginedMember");
+		rq.logout();
 	}
 
 	private void actionLogin(Rq rq) {
@@ -90,7 +91,7 @@ public class UsrMemberController extends Controller {
 			return;
 		}
 
-		rq.setSessionAttr("loginedMember", member);
+		rq.login(member);
 
 		System.out.printf("%s님 환영합니다.\n", member.getNickname());
 	}

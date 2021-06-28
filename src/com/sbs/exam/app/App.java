@@ -16,14 +16,13 @@ public class App {
 	public void run() {
 		System.out.println("== 텍스트 게시판 시작 ==");
 
-		Session session = Container.getSession();
-
 		while (true) {
-			Member loginedMember = (Member) session.getAttribute("loginedMember");
-
 			String promprName = "명령어";
 
-			if (loginedMember != null) {
+			Rq rq = new Rq();
+
+			if (rq.isLogined()) {
+				Member loginedMember = rq.getLoginedMember();
 				promprName = loginedMember.getNickname();
 			}
 
@@ -31,7 +30,7 @@ public class App {
 
 			String command = sc.nextLine().trim();
 
-			Rq rq = new Rq(command);
+			rq.setCommand(command);
 
 			if (rq.isValid() == false) {
 				System.out.printf("명령어가 올바르지 않습니다.\n");
