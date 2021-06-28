@@ -26,13 +26,13 @@ public class UsrMemberController {
 	private void makeTestData() {
 		for (int i = 0; i < 2; i++) {
 			Member member = new Member();
-			member.id = membersLastId + 1;
-			member.regDate = Util.getNowDateStr();
-			member.updateDate = Util.getNowDateStr();
-			member.loginId = "user" + member.id;
-			member.loginPw = member.loginId;
-			member.name = "홍길동" + member.id;
-			member.nickname = "강바랑" + member.id;
+			member.setId(membersLastId + 1);
+			member.setRegDate(Util.getNowDateStr());
+			member.setUpdateDate(Util.getNowDateStr());
+			member.setLoginId("user" + member.getId());
+			member.setLoginPw(member.getLoginId());
+			member.setName("홍길동" + member.getId());
+			member.setNickname("강바랑" + member.getId());
 
 			members.add(member);
 			membersLastId++;
@@ -41,7 +41,7 @@ public class UsrMemberController {
 
 	private Member getMemberByLoginId(String loginId) {
 		for (Member member : members) {
-			if (member.loginId.equals(loginId)) {
+			if (member.getLoginId().equals(loginId)) {
 				return member;
 			}
 		}
@@ -85,13 +85,13 @@ public class UsrMemberController {
 			return;
 		}
 
-		if (member.loginPw.equals(loginPw) == false) {
+		if (member.getLoginPw().equals(loginPw) == false) {
 			System.out.println("비밀번호가 일치하지 않습니다.");
 			return;
 		}
 
 		rq.setSessionAttr("loginedMember", member);
 
-		System.out.printf("%s님 환영합니다.\n", member.nickname);
+		System.out.printf("%s님 환영합니다.\n", member.getNickname());
 	}
 }

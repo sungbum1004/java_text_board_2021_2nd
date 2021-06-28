@@ -21,7 +21,7 @@ public class Session {
 	public void removeAttribute(String key) {
 		store.remove(key);
 	}
-	
+
 	public boolean hasAttribute(String key) {
 		return store.containsKey(key);
 	}

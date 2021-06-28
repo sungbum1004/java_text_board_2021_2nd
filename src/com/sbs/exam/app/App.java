@@ -27,7 +27,7 @@ public class App {
 			String promprName = "명령어";
 
 			if (loginedMember != null) {
-				promprName = loginedMember.nickname;
+				promprName = loginedMember.getNickname();
 			}
 
 			System.out.printf("%s) ", promprName);
@@ -36,7 +36,7 @@ public class App {
 
 			Rq rq = new Rq(command);
 
-			if (rq.isValid == false) {
+			if (rq.isValid() == false) {
 				System.out.printf("명령어가 올바르지 않습니다.\n");
 				continue;
 			}

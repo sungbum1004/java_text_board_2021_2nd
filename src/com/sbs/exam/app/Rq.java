@@ -5,14 +5,19 @@ import java.util.Map;
 
 import com.sbs.exam.app.container.Container;
 
+import lombok.Getter;
+
 public class Rq {
 	private Map<String, String> params;
 	private String command;
-	private String controllerTypeName;
+	@Getter
+	private String controllerTypeCode;
+	@Getter
 	private String controllerName;
 	private String actionMethodName;
 	private String queryString = "";
-	public boolean isValid = true;
+	@Getter
+	private boolean isValid = true;
 
 	public Rq(String command) {
 		this.command = command;
@@ -42,13 +47,13 @@ public class Rq {
 			return;
 		}
 
-		controllerTypeName = commandBits[1];
+		controllerTypeCode = commandBits[1];
 		controllerName = commandBits[2];
 		actionMethodName = commandBits[3];
 	}
 
-	public Object getActionPath() {
-		return "/" + controllerTypeName + "/" + controllerName + "/" + actionMethodName;
+	public String getActionPath() {
+		return "/" + controllerTypeCode + "/" + controllerName + "/" + actionMethodName;
 	}
 
 	public int getIntParam(String paramName, int defaultValue) {
@@ -63,18 +68,10 @@ public class Rq {
 		}
 	}
 
-	public String getControllerTypeCode() {
-		return controllerTypeName;
-	}
-
 	public void setSessionAttr(String key, Object value) {
 		Session session = Container.getSession();
 
 		session.setAttribute(key, value);
-	}
-
-	public Object getControllerName() {
-		return controllerName;
 	}
 
 	public void removeSessionAttr(String key) {
