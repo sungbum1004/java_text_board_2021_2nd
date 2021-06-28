@@ -58,7 +58,7 @@ public class UsrMemberController {
 	}
 
 	private void actionLogout(Rq rq) {
-		// TODO Auto-generated method stub
+		rq.removeSessionAttr("loginedMember");
 	}
 
 	private void actionLogin(Rq rq) {
