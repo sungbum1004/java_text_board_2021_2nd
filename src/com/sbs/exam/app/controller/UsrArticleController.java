@@ -9,7 +9,7 @@ import com.sbs.exam.app.container.Container;
 import com.sbs.exam.app.dto.Article;
 import com.sbs.exam.util.Util;
 
-public class UsrArticleController {
+public class UsrArticleController extends Controller {
 	private List<Article> articles;
 	private int articlesLastId;
 	private Scanner sc;
@@ -55,7 +55,6 @@ public class UsrArticleController {
 			actionDetail(rq);
 		} else if (rq.getActionPath().equals("/usr/article/delete")) {
 			actionDelete(rq);
-
 		} else if (rq.getActionPath().equals("/usr/article/modify")) {
 			actionModify(rq);
 		}

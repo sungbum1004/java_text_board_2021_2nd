@@ -9,7 +9,7 @@ import com.sbs.exam.app.container.Container;
 import com.sbs.exam.app.dto.Member;
 import com.sbs.exam.util.Util;
 
-public class UsrMemberController {
+public class UsrMemberController extends Controller {
 	private List<Member> members;
 	private int membersLastId;
 	private Scanner sc;
