@@ -1,52 +1,22 @@
 package com.sbs.exam.app.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import com.sbs.exam.app.Rq;
 import com.sbs.exam.app.container.Container;
 import com.sbs.exam.app.dto.Member;
-import com.sbs.exam.util.Util;
+import com.sbs.exam.app.service.MemberService;
 
 public class UsrMemberController extends Controller {
-	private List<Member> members;
-	private int membersLastId;
 	private Scanner sc;
+	private MemberService memberService;
 
 	public UsrMemberController() {
 		sc = Container.getSc();
-		members = new ArrayList<>();
-		membersLastId = 0;
+		memberService = Container.getMemberService();
 
 		// 테스트 게시물 만들기
-		makeTestData();
-	}
-
-	private void makeTestData() {
-		for (int i = 0; i < 2; i++) {
-			Member member = new Member();
-			member.setId(membersLastId + 1);
-			member.setRegDate(Util.getNowDateStr());
-			member.setUpdateDate(Util.getNowDateStr());
-			member.setLoginId("user" + member.getId());
-			member.setLoginPw(member.getLoginId());
-			member.setName("홍길동" + member.getId());
-			member.setNickname("강바랑" + member.getId());
-
-			members.add(member);
-			membersLastId++;
-		}
-	}
-
-	private Member getMemberByLoginId(String loginId) {
-		for (Member member : members) {
-			if (member.getLoginId().equals(loginId)) {
-				return member;
-			}
-		}
-
-		return null;
+		memberService.makeTestData();
 	}
 
 	@Override
@@ -71,7 +41,7 @@ public class UsrMemberController extends Controller {
 			return;
 		}
 
-		Member member = getMemberByLoginId(loginId);
+		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
 			System.out.println("해당 회원은 존재하지 않습니다.");
