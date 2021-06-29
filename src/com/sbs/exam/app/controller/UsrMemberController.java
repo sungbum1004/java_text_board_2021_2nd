@@ -64,5 +64,6 @@ public class UsrMemberController extends Controller {
 		rq.login(member);
 
 		System.out.printf("%s님 환영합니다.\n", member.getNickname());
+		
 	}
 }
