@@ -116,14 +116,16 @@ public class UsrArticleController extends Controller {
 			System.out.printf("%d / %s / %s\n", article.getId(), article.getRegDate(), article.getTitle());
 		}
 	}
-
+	
 	private void actionWrite(Rq rq) {
 		System.out.printf("제목 : ");
 		String title = sc.nextLine().trim();
 		System.out.printf("내용 : ");
 		String body = sc.nextLine().trim();
 
-		int id = articleService.write(1, title, body);
+		int loginedMemberId = rq.getLoginedMemberId();
+		
+		int id = articleService.write(1, loginedMemberId, title, body);
 
 		System.out.printf("%d번 게시물이 생성되었습니다.\n", id);
 	}
